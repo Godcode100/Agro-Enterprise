@@ -23,6 +23,7 @@ from django.urls import include,path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('cart/', include('cart.urls', namespace='cart')),
+    path('orders/', include('orders.urls', namespace='orders')),
     path("shop/", include("shop.urls",namespace='shop')),
     path("", include("pages.urls",namespace='pages')),
 ]
