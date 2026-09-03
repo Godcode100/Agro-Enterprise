@@ -1,0 +1,298 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}Prime Crop Care – Smart Farming Solutions{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* ---------- HERO (with background slideshow) ---------- */
+    .hero {
+        position: relative;
+        height: 600px;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        border-radius: 0 0 40px 40px;
+        overflow: hidden;
+        margin-bottom: 40px;
+        background-color: #1e3a1f; /* fallback */
+    }
+
+    /* Background slides container */
+    .hero-slides {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+    .hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out;
+    }
+    .hero-slide.active {
+        opacity: 1;
+    }
+
+    /* Dark overlay for better text contrast */
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1;
+    }
+
+    /* Hero content on top */
+    .hero .container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        flex-wrap: wrap;
+        color: #fff;
+    }
+    .hero-text {
+        flex: 1 1 300px;
+    }
+    .hero-text h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.2;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .hero-text h1 span {
+        color: #f9a825;
+    }
+    .hero-text p {
+        font-size: 1.2rem;
+        margin: 20px 0 30px;
+        opacity: 0.95;
+        max-width: 500px;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .btn {
+        display: inline-block;
+        background: #2e7d32;
+        color: #fff;
+        padding: 14px 36px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: background 0.3s, transform 0.1s;
+        border: none;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background: #1e5a22;
+        transform: scale(1.02);
+    }
+    .btn-outline {
+        background: transparent;
+        color: #fff;
+        border: 2px solid #fff;
+        margin-left: 12px;
+    }
+    .btn-outline:hover {
+        background: #fff;
+        color: #1e3a1f;
+    }
+
+    .hero-image-placeholder {
+        flex: 1 1 300px;
+        text-align: center;
+        font-size: 8rem;
+        opacity: 0.7;
+        color: #fff;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        pointer-events: none;
+    }
+
+    /* ---------- SERVICES ---------- */
+    .section-title {
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #1e3a1f;
+        margin-bottom: 10px;
+    }
+    .section-sub {
+        text-align: center;
+        color: #5a6b58;
+        margin-bottom: 40px;
+        font-size: 1.05rem;
+    }
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+    }
+    .service-card {
+        background: #fff;
+        padding: 30px 20px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+        text-align: center;
+        transition: transform 0.25s, box-shadow 0.25s;
+        border-bottom: 4px solid #2e7d32;
+    }
+    .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(46, 125, 50, 0.12);
+    }
+    .service-card i {
+        font-size: 3rem;
+        color: #2e7d32;
+        margin-bottom: 16px;
+    }
+    .service-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: #1e3a1f;
+    }
+    .service-card p {
+        color: #5a6b58;
+        font-size: 0.95rem;
+    }
+
+    /* ---------- CTA ---------- */
+    .cta {
+        background: #2e7d32;
+        color: #fff;
+        padding: 50px 0;
+        border-radius: 40px;
+        margin: 50px 0 20px;
+        text-align: center;
+    }
+    .cta h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    .cta p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 25px;
+    }
+    .cta .btn {
+        background: #f9a825;
+        color: #1e3a1f;
+    }
+    .cta .btn:hover {
+        background: #f57f17;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+        .hero { height: 500px; }
+        .hero-text h1 { font-size: 2.2rem; }
+        .hero-image-placeholder { font-size: 5rem; }
+        .section-title { font-size: 1.8rem; }
+        .cta h2 { font-size: 1.8rem; }
+        .btn-outline { margin-left: 0; margin-top: 10px; }
+    }
+    @media (max-width: 480px) {
+        .hero { height: 450px; }
+        .hero-text h1 { font-size: 1.8rem; }
+        .service-card { padding: 20px 15px; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== HERO WITH AUTO-SCROLLING BACKGROUNDS ===== -->
+<section class="hero" id="heroSection">
+    <!-- Background slides -->
+    <div class="hero-slides" id="heroSlides">
+        <!-- Replace the src URLs below with your own high-res farm images -->
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&h=800&fit=crop&crop=center');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&h=800&fit=crop&crop=center');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1920&h=800&fit=crop&crop=center');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=1920&h=800&fit=crop&crop=center');"></div>
+    </div>
+    <!-- Dark overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Content -->
+    <div class="container">
+        <div class="hero-text">
+            <h1>Smart Farming Starts <span>Here</span></h1>
+            <p>
+                Get accurate soil scanning and premium agro inputs tailored to your farm.
+                Boost yields, save costs, and grow sustainably with Prime Crop Care.
+            </p>
+            <div>
+                <a href="{% url 'pages:services' %}" class="btn">Explore Services</a>
+                <a href="#" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-image-placeholder">
+            <i class="fas fa-tractor"></i>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="container">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">Innovative solutions for modern agriculture</p>
+    <div class="services-grid">
+        <div class="service-card">
+            <i class="fas fa-microscope"></i>
+            <h3>Soil Scanning</h3>
+            <p>Advanced sensors and lab analysis to evaluate nutrient levels, pH, and moisture for precision farming.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-truck"></i>
+            <h3>Agro Input Supply</h3>
+            <p>High-quality seeds, fertilizers, and crop protection products delivered right to your farm.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Farm Advisory</h3>
+            <p>Data-driven recommendations for planting, irrigation, and pest management to maximize your harvest.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="container">
+    <div class="cta">
+        <h2>Ready to Transform Your Farm?</h2>
+        <p>Contact us today and let our experts guide you to higher productivity.</p>
+        <a href="#" class="btn">Get Started</a>
+    </div>
+</section>
+
+<script>
+    // ===== HERO BACKGROUND AUTO-SCROLL (slideshow) =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        // Change background every 5 seconds
+        let interval = setInterval(nextSlide, 5000);
+
+        // (Optional) Pause on hover
+        const hero = document.getElementById('heroSection');
+        hero.addEventListener('mouseenter', () => clearInterval(interval));
+        hero.addEventListener('mouseleave', () => {
+            interval = setInterval(nextSlide, 5000);
+        });
+    });
+</script>
+{% endblock %}

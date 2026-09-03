@@ -1,0 +1,272 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}About Prime Crop Care{% endblock %}
+
+{% block extra_css %}
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        padding: 60px 0 40px;
+        border-radius: 0 0 40px 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .about-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #1e3a1f;
+    }
+    .about-hero p {
+        font-size: 1.15rem;
+        max-width: 700px;
+        margin: 12px auto 0;
+        color: #2d3e2b;
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        margin: 40px 0;
+    }
+    .about-grid img {
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    .about-grid h2 {
+        font-size: 2rem;
+        color: #1e3a1f;
+        margin-bottom: 15px;
+    }
+    .about-grid p {
+        color: #3d4f3b;
+        margin-bottom: 16px;
+    }
+
+    .values {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 25px;
+        margin: 40px 0;
+    }
+    .value-item {
+        background: #fff;
+        padding: 25px 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        text-align: center;
+        border-top: 4px solid #2e7d32;
+    }
+    .value-item i {
+        font-size: 2.4rem;
+        color: #2e7d32;
+        margin-bottom: 12px;
+    }
+    .value-item h4 {
+        font-size: 1.2rem;
+        color: #1e3a1f;
+    }
+    .value-item p {
+        font-size: 0.9rem;
+        color: #5a6b58;
+        margin-top: 6px;
+    }
+
+    /* ---------- TEAM ---------- */
+    .team {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin: 30px 0;
+    }
+    .team-member {
+        background: #fff;
+        padding: 20px 15px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        transition: transform 0.2s;
+    }
+    .team-member:hover { transform: translateY(-5px); }
+    .team-member img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 12px;
+        border: 4px solid #e8f5e9;
+    }
+    .team-member h4 {
+        font-size: 1.1rem;
+        color: #1e3a1f;
+    }
+    .team-member p {
+        font-size: 0.9rem;
+        color: #5a6b58;
+    }
+
+    /* ---------- TESTIMONIALS ---------- */
+    .testimonials {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+    }
+    .testimonial {
+        background: #fff;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-left: 4px solid #f9a825;
+    }
+    .testimonial img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 12px;
+        border: 3px solid #e8f5e9;
+    }
+    .testimonial blockquote {
+        font-style: italic;
+        color: #2d3e2b;
+        margin: 10px 0;
+        font-size: 1rem;
+    }
+    .testimonial cite {
+        font-weight: 600;
+        color: #1e3a1f;
+        font-style: normal;
+    }
+    .testimonial .role {
+        font-size: 0.85rem;
+        color: #5a6b58;
+    }
+
+    @media (max-width: 768px) {
+        .about-grid { grid-template-columns: 1fr; text-align: center; }
+        .about-hero h1 { font-size: 2.2rem; }
+    }
+    @media (max-width: 480px) {
+        .about-hero { padding: 40px 0 25px; }
+        .about-hero h1 { font-size: 1.8rem; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== ABOUT HERO ===== -->
+<section class="about-hero">
+    <div class="container">
+        <h1>About Prime Crop Care</h1>
+        <p>We are a team of agronomists, tech enthusiasts, and supply-chain experts dedicated to empowering farmers with data-driven solutions and high-quality inputs.</p>
+    </div>
+</section>
+
+<!-- ===== OUR STORY ===== -->
+<section class="container">
+    <div class="about-grid">
+        <div>
+            <i class="fas fa-seedling" style="font-size:6rem; color:#2e7d32; display:block; margin-bottom:20px;"></i>
+            <h2>Our Story</h2>
+            <p>
+                Founded in 2020, Prime Crop Care was born out of a passion for sustainable agriculture. We saw that smallholder farmers often lack access to reliable soil information and quality inputs, leading to poor yields and wasted resources.
+            </p>
+            <p>
+                Today, we bridge that gap by combining cutting-edge soil scanning technology with a trusted supply chain for agro inputs. Our mission is to make precision farming accessible to every farmer, from small plots to large estates.
+            </p>
+        </div>
+        <div>
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop" alt="Farm landscape" />
+        </div>
+    </div>
+</section>
+
+<!-- ===== VALUES ===== -->
+<section class="container">
+    <h2 class="section-title">Our Core Values</h2>
+    <div class="values">
+        <div class="value-item">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h4>Farmer First</h4>
+            <p>Every decision we make is guided by what benefits the farmer most.</p>
+        </div>
+        <div class="value-item">
+            <i class="fas fa-flask"></i>
+            <h4>Innovation</h4>
+            <p>We embrace technology and continuous improvement to deliver better solutions.</p>
+        </div>
+        <div class="value-item">
+            <i class="fas fa-leaf"></i>
+            <h4>Sustainability</h4>
+            <p>We promote practices that protect the environment and ensure long-term productivity.</p>
+        </div>
+        <div class="value-item">
+            <i class="fas fa-users"></i>
+            <h4>Integrity</h4>
+            <p>Transparency and honesty are at the core of our relationships with farmers and partners.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TEAM (with images) ===== -->
+<section class="container" style="margin: 50px 0;">
+    <h2 class="section-title">Meet the Team</h2>
+    <p class="section-sub">Passionate experts working for your farm’s success</p>
+    <div class="team">
+        <div class="team-member">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dr. Jane Mwangi" />
+            <h4>Dr. Jane Mwangi</h4>
+            <p>Founder &amp; Chief Agronomist</p>
+        </div>
+        <div class="team-member">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Ochieng" />
+            <h4>James Ochieng</h4>
+            <p>Head of Soil Science</p>
+        </div>
+        <div class="team-member">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Grace Akinyi" />
+            <h4>Grace Akinyi</h4>
+            <p>Supply Chain Manager</p>
+        </div>
+        <div class="team-member">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Peter Okello" />
+            <h4>Peter Okello</h4>
+            <p>Field Operations Lead</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS (with images) ===== -->
+<section class="container" style="margin: 50px 0;">
+    <h2 class="section-title">What Our Farmers Say</h2>
+    <p class="section-sub">Real stories from the field</p>
+    <div class="testimonials">
+        <div class="testimonial">
+            <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="John" />
+            <blockquote>“Prime Crop Care’s soil scanning saved my maize crop. I now know exactly what nutrients to apply – my yields have doubled!”</blockquote>
+            <cite>John K., Farmer – Masaka</cite>
+            <span class="role">Maize grower</span>
+        </div>
+        <div class="testimonial">
+            <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Sarah" />
+            <blockquote>“The agro inputs are top quality and delivered on time. Their advisory team is always available to answer my questions.”</blockquote>
+            <cite>Sarah N., Farmer – Gulu</cite>
+            <span class="role">Vegetable farmer</span>
+        </div>
+        <div class="testimonial">
+            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="David" />
+            <blockquote>“I never knew soil pH could affect yields so much. After scanning, I adjusted my lime application and saw immediate results.”</blockquote>
+            <cite>David O., Farmer – Jinja</cite>
+            <span class="role">Coffee farmer</span>
+        </div>
+    </div>
+</section>
+{% endblock %}

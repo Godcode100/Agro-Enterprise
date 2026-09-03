@@ -1,0 +1,264 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us – Prime Crop Care{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-hero {
+        background: linear-gradient(135deg, #e8f5e9, #a5d6a7);
+        padding: 60px 0 40px;
+        border-radius: 0 0 40px 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .contact-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #1e3a1f;
+    }
+    .contact-hero p {
+        font-size: 1.15rem;
+        max-width: 700px;
+        margin: 12px auto 0;
+        color: #2d3e2b;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin: 40px 0;
+    }
+
+    /* ---- FORM ---- */
+    .contact-form h2, .contact-details h2 {
+        font-size: 1.8rem;
+        color: #1e3a1f;
+        margin-bottom: 20px;
+    }
+    .contact-form form label {
+        display: block;
+        font-weight: 600;
+        margin: 16px 0 4px;
+        color: #1e3a1f;
+        font-size: 0.95rem;
+    }
+    .contact-form form input,
+    .contact-form form textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e8f5e9;
+        border-radius: 12px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        background: #fff;
+        transition: border 0.2s;
+        box-sizing: border-box;
+    }
+    .contact-form form input:focus,
+    .contact-form form textarea:focus {
+        outline: none;
+        border-color: #2e7d32;
+        box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+    }
+    .contact-form form textarea {
+        height: 150px;
+        resize: vertical;
+    }
+    .contact-form form .btn-submit {
+        margin-top: 20px;
+        background: #2e7d32;
+        color: #fff;
+        padding: 14px 40px;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+    }
+    .contact-form form .btn-submit:hover {
+        background: #1e5a22;
+        transform: scale(1.02);
+    }
+
+    /* ---- DETAILS ---- */
+    .contact-details .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+        background: #fff;
+        padding: 16px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        border-left: 4px solid #f9a825;
+    }
+    .contact-details .info-item i {
+        font-size: 1.6rem;
+        color: #2e7d32;
+        width: 40px;
+        text-align: center;
+        margin-top: 4px;
+    }
+    .contact-details .info-item h4 {
+        margin: 0 0 2px;
+        font-size: 1.1rem;
+        color: #1e3a1f;
+    }
+    .contact-details .info-item p {
+        margin: 0;
+        color: #5a6b58;
+        font-size: 0.95rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 16px;
+        margin-top: 20px;
+    }
+    .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #e8f5e9;
+        color: #2e7d32;
+        font-size: 1.4rem;
+        transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .social-links a:hover {
+        background: #2e7d32;
+        color: #fff;
+        transform: translateY(-4px);
+    }
+
+    /* ---- MAP IFRAME ---- */
+    .map-iframe {
+        margin: 40px 0 20px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    }
+    .map-iframe iframe {
+        width: 100%;
+        height: 400px;
+        border: 0;
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .contact-grid { grid-template-columns: 1fr; }
+        .contact-hero h1 { font-size: 2.2rem; }
+        .map-iframe iframe { height: 280px; }
+    }
+    @media (max-width: 480px) {
+        .contact-hero { padding: 40px 0 25px; }
+        .contact-hero h1 { font-size: 1.8rem; }
+        .contact-details .info-item { flex-direction: column; align-items: center; text-align: center; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== HERO ===== -->
+<section class="contact-hero">
+    <div class="container">
+        <h1>Get in Touch</h1>
+        <p>We’d love to hear from you. Reach out for soil scanning, input orders, or any farming advisory.</p>
+    </div>
+</section>
+
+<!-- ===== CONTACT GRID ===== -->
+<section class="container">
+    <div class="contact-grid">
+        <!-- LEFT: FORM -->
+        <div class="contact-form">
+            <h2><i class="fas fa-paper-plane" style="color:#2e7d32; margin-right:8px;"></i> Send a Message</h2>
+            <form method="post" action="#">
+                {% csrf_token %}
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="John Mukiibi" required />
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="john@example.com" required />
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+256 700 123 456" />
+
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Soil scanning inquiry" />
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us how we can help..." required></textarea>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+
+        <!-- RIGHT: DETAILS -->
+        <div class="contact-details">
+            <h2><i class="fas fa-address-card" style="color:#2e7d32; margin-right:8px;"></i> Contact Info</h2>
+
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h4>Our Office</h4>
+                    <p>Plot 32, Jinja Road,<br />Kampala, Uganda</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="fas fa-phone-alt"></i>
+                <div>
+                    <h4>Phone</h4>
+                    <p><a href="tel:+256700123456">+256 700 123 456</a><br />
+                    <a href="tel:+256701234567">+256 701 234 567</a></p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:info@primecropcare.com">info@primecropcare.com</a><br />
+                    <a href="mailto:support@primecropcare.com">support@primecropcare.com</a></p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h4>Working Hours</h4>
+                    <p>Mon – Fri: 8:00 AM – 6:00 PM<br />
+                    Sat: 9:00 AM – 2:00 PM<br />
+                    Sun: Closed</p>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAP IFRAME ===== -->
+    <div class="map-iframe">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.373805150773!2d32.5811!3d0.3136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177d0a8c2d1f6f3f%3A0x5e0d7a7d3b7e3d0f!2sKampala%2C%20Uganda!5e0!3m2!1sen!2s!4v1700000000000"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</section>
+{% endblock %}

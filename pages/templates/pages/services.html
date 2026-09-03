@@ -1,0 +1,261 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}Our Services – Prime Crop Care{% endblock %}
+
+{% block extra_css %}
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+    .services-hero {
+        background: linear-gradient(135deg, #e8f5e9, #a5d6a7);
+        padding: 60px 0 40px;
+        border-radius: 0 0 40px 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .services-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #1e3a1f;
+    }
+    .services-hero p {
+        font-size: 1.15rem;
+        max-width: 700px;
+        margin: 12px auto 0;
+        color: #2d3e2b;
+    }
+
+    /* Service Cards */
+    .service-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+    }
+    .service-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(46, 125, 50, 0.12);
+    }
+    .service-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+    }
+    .service-card .card-body {
+        padding: 20px 25px 25px;
+    }
+    .service-card h3 {
+        font-size: 1.4rem;
+        color: #1e3a1f;
+        margin-bottom: 8px;
+    }
+    .service-card p {
+        color: #5a6b58;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    .service-card .btn-small {
+        display: inline-block;
+        margin-top: 15px;
+        background: #2e7d32;
+        color: #fff;
+        padding: 8px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+        border: none;
+        cursor: pointer;
+    }
+    .service-card .btn-small:hover {
+        background: #1e5a22;
+    }
+
+    /* Map Section */
+    .map-section {
+        margin: 50px 0;
+        background: #fff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    }
+    .map-section h2 {
+        text-align: center;
+        font-size: 2rem;
+        color: #1e3a1f;
+        margin-bottom: 20px;
+    }
+    #ugandaMap {
+        height: 500px;
+        width: 100%;
+        border-radius: 12px;
+        z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+        .services-hero h1 { font-size: 2.2rem; }
+        #ugandaMap { height: 350px; }
+    }
+    @media (max-width: 480px) {
+        .services-hero { padding: 40px 0 25px; }
+        .services-hero h1 { font-size: 1.8rem; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== SERVICES HERO ===== -->
+<section class="services-hero">
+    <div class="container">
+        <h1>Our Services</h1>
+        <p>Tailored solutions to help you grow more with less – from soil to harvest.</p>
+    </div>
+</section>
+
+<!-- ===== SERVICE CARDS ===== -->
+<section class="container">
+    <div class="service-cards">
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop" alt="Soil Scanning" />
+            <div class="card-body">
+                <h3><i class="fas fa-microscope" style="color:#2e7d32; margin-right:8px;"></i> Soil Scanning</h3>
+                <p>Comprehensive analysis of soil nutrients, pH, moisture, and texture using state-of-the-art sensors and lab testing. Get detailed reports and tailored recommendations.</p>
+                <a href="#" class="btn-small">Learn More</a>
+            </div>
+        </div>
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop" alt="Agro Inputs" />
+            <div class="card-body">
+                <h3><i class="fas fa-truck" style="color:#2e7d32; margin-right:8px;"></i> Agro Input Supply</h3>
+                <p>High-quality seeds, organic and chemical fertilizers, pesticides, and herbicides sourced from trusted manufacturers. Delivered directly to your farm.</p>
+                <a href="#" class="btn-small">Learn More</a>
+            </div>
+        </div>
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop" alt="Farm Advisory" />
+            <div class="card-body">
+                <h3><i class="fas fa-chart-line" style="color:#2e7d32; margin-right:8px;"></i> Farm Advisory</h3>
+                <p>Data-backed guidance on planting schedules, irrigation, pest control, and crop rotation. Our experts work with you to maximize productivity sustainably.</p>
+                <a href="#" class="btn-small">Learn More</a>
+            </div>
+        </div>
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop" alt="Drone Scouting" />
+            <div class="card-body">
+                <h3><i class="fas fa-drone" style="color:#2e7d32; margin-right:8px;"></i> Drone Scouting</h3>
+                <p>Aerial monitoring of crop health, pest infestations, and water stress using drone imagery. Get early warnings and precise intervention maps.</p>
+                <a href="#" class="btn-small">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MAP OF UGANDA (with fallback) ===== -->
+<section class="container map-section">
+    <h2><i class="fas fa-map-marked-alt" style="color:#2e7d32;"></i> Our Operational Districts</h2>
+    <p style="text-align:center; margin-bottom:15px; color:#5a6b58;">
+        We serve farmers across Uganda. Click a district or marker for details.
+    </p>
+    <div id="ugandaMap"></div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize map
+        var map = L.map('ugandaMap').setView([1.3733, 32.2903], 7);
+
+        // Base tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // ----- FALLBACK DATA (major cities/districts) -----
+        var fallbackDistricts = [
+            { name: 'Kampala', lat: 0.3136, lng: 32.5811 },
+            { name: 'Jinja', lat: 0.4390, lng: 33.2031 },
+            { name: 'Gulu', lat: 2.7722, lng: 32.2975 },
+            { name: 'Masaka', lat: -0.3325, lng: 31.7327 },
+            { name: 'Mbarara', lat: -0.6078, lng: 30.6470 },
+            { name: 'Mbale', lat: 1.0761, lng: 34.1818 },
+            { name: 'Arua', lat: 3.0310, lng: 30.9097 },
+            { name: 'Fort Portal', lat: 0.6710, lng: 30.2750 },
+            { name: 'Lira', lat: 2.2526, lng: 32.9014 },
+            { name: 'Soroti', lat: 1.7243, lng: 33.6178 }
+        ];
+
+        // Function to add markers (fallback)
+        function addFallbackMarkers() {
+            fallbackDistricts.forEach(function(d) {
+                L.marker([d.lat, d.lng]).addTo(map)
+                    .bindPopup('<strong>' + d.name + '</strong><br>We serve this district.');
+            });
+        }
+
+        // ----- TRY TO LOAD GEOJSON DISTRICTS -----
+        var districtUrl = 'https://raw.githubusercontent.com/hrpzcf/uganda-districts/master/uganda_districts.geojson';
+
+        fetch(districtUrl)
+            .then(function(response) {
+                if (!response.ok) throw new Error('HTTP error ' + response.status);
+                return response.json();
+            })
+            .then(function(data) {
+                // Success – add district polygons
+                L.geoJSON(data, {
+                    style: function(feature) {
+                        return {
+                            color: '#2e7d32',
+                            weight: 2,
+                            fillColor: '#a5d6a7',
+                            fillOpacity: 0.6
+                        };
+                    },
+                    onEachFeature: function(feature, layer) {
+                        // Try several common property names for district name
+                        var name = feature.properties.DISTRICT ||
+                                   feature.properties.NAME ||
+                                   feature.properties.Name ||
+                                   feature.properties.ADMIN_LEVEL_1 ||
+                                   'Unknown District';
+                        layer.bindPopup('<strong>' + name + '</strong><br>We serve this district.');
+                    }
+                }).addTo(map);
+            })
+            .catch(function(err) {
+                // Fallback – show markers for major districts
+                console.warn('Could not load district GeoJSON, using fallback markers.', err);
+                addFallbackMarkers();
+                // Also add a small note on the map (optional)
+                L.control.info({
+                    position: 'bottomright'
+                }).addTo(map);
+                // Show a simple info message
+                var info = L.control({ position: 'bottomleft' });
+                info.onAdd = function() {
+                    var div = L.DomUtil.create('div', 'info');
+                    div.style.background = 'rgba(255,255,255,0.8)';
+                    div.style.padding = '8px 14px';
+                    div.style.borderRadius = '8px';
+                    div.style.fontSize = '14px';
+                    div.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                    div.innerHTML = '<i class="fas fa-info-circle"></i> Showing major districts (fallback)';
+                    return div;
+                };
+                info.addTo(map);
+            });
+    });
+</script>
+{% endblock %}
