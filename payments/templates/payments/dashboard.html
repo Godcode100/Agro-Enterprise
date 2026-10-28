@@ -1,0 +1,57 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+    Checkout
+{% endblock %}
+{% block content %}
+    <h1>Checkout</h1>
+    <div class="order-info">
+        <h3>Your order</h3>
+        <ul>
+            {% for item in cart %}
+                <li>
+                    {{ item.quantity }}x {{ item.product.name }}
+                    <span>
+                        UGX {{ item.total_price }}
+                    </span>
+                </li>
+            {% endfor %}
+            
+        </ul>
+        <p>Total: UGX {{ cart.get_total_price }}</p>
+    </div>
+    <div class="order-info">
+        <h3>Payment Summary</h3>
+    <p>Total payments: {{Total_payments}}/p>
+        <p>Successful payments: {{successful_payments}}</p>
+        <p>Pending payments: {{pending_payments}}</p>
+        <p>Failed payments: {{failed_payments}}</p>
+
+        <h3>Recent Payments</h3>
+        {% if payments %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                <tr>
+                    <td>UGX {{payment.amount}}</td>
+                    <td>UGX {{payment.phone_number}}</td>
+                    <td>UGX {{payment.status}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <form method="post" class="order-form">
+        {{ form.as_p }}
+        <p><input type="submit" value="Place order">pay with Mobile Wallets</p>
+        {% csrf_token %}
+    </form>
+{% endblock %}
